@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photo AI Enhancer | Professional Grade Restoration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.1/",
+    "react": "https://esm.sh/react@^19.1.1",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.1/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.13.0"
+  }
+}
+</script>
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+  .bg-premium-gradient {
+    background-color: #02040a;
+    background-image: radial-gradient(at 2% 5%, hsla(220, 80%, 25%, 0.3) 0px, transparent 50%),
+                      radial-gradient(at 95% 90%, hsla(280, 80%, 30%, 0.35) 0px, transparent 50%),
+                      radial-gradient(at 50% 50%, hsla(260, 60%, 15%, 0.2) 0px, transparent 70%);
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.03;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOCIgbnVtT2N0YXZlcz0iNCIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiLz48L3N2Zz4=');
+    pointer-events: none;
+    z-index: -1;
+  }
+  .aurora-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .aurora-shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(110deg, transparent 20%, rgba(139, 92, 246, 0.2), transparent 80%);
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 0.5s, transform 0s 0.5s;
+    animation: shimmer 5s infinite;
+  }
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateX(100%); opacity: 0;}
+  }
+</style>
+</head>
+  <body class="bg-premium-gradient text-gray-200 font-sans antialiased">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

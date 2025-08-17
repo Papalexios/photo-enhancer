@@ -1,0 +1,5 @@
+{
+  "name": "Photo AI Enhancer",
+  "description": "An AI-powered web application that enhances low-quality, blurry, or old photographs into high-resolution, restored masterpieces. Features include one-tap enhancement, upscaling, noise reduction, facial detail optimization, and old photo restoration.",
+  "requestFramePermissions": []
+}
