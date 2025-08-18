@@ -24,17 +24,17 @@ const EnhancementOption: React.FC<EnhancementOptionProps> = ({ icon, title, desc
       disabled={disabled}
       className={`p-4 w-full text-left rounded-xl border transition-all duration-300 transform hover:-translate-y-0.5 ${
         enabled 
-          ? 'bg-violet-900/30 border-violet-500 shadow-[0_0_15px_rgba(139,92,246,0.2)]' 
-          : 'bg-slate-900/70 border-slate-700 hover:border-slate-500'
+          ? 'bg-[var(--color-accent-subtle)] border-[var(--color-accent-primary)] shadow-[0_0_15px_var(--color-accent-glow)]' 
+          : 'bg-black/10 border-[var(--color-border-secondary)] hover:border-[var(--color-accent-secondary)]'
       } ${disabled ? 'opacity-50 cursor-not-allowed saturate-50 hover:transform-none' : ''}`}
     >
       <div className="flex items-start gap-4">
-        <div className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300 ${enabled ? 'bg-gradient-to-br from-violet-500 to-purple-500 text-white' : 'bg-slate-700 text-slate-300'}`}>
+        <div className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300 ${enabled ? 'bg-gradient-to-br from-[var(--color-accent-gradient-from)] to-[var(--color-accent-gradient-to)] text-white' : 'bg-[var(--color-border-secondary)] text-[var(--color-text-secondary)]'}`}>
             {icon}
         </div>
         <div>
-          <h3 className="font-semibold text-slate-100">{title}</h3>
-          <p className="text-xs text-slate-400 mt-1">{description}</p>
+          <h3 className="font-semibold text-[var(--color-text-strong)]">{title}</h3>
+          <p className="text-xs text-[var(--color-text-secondary)] mt-1">{description}</p>
         </div>
       </div>
     </button>
@@ -69,8 +69,8 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
   return (
     <div className="flex flex-col space-y-6">
       <div>
-        <h2 className="text-xl sm:text-2xl font-bold text-slate-100 tracking-tight">Enhance Image</h2>
-        <p className="text-sm text-slate-400 mt-1">
+        <h2 className="text-xl sm:text-2xl font-bold text-[var(--color-text-strong)] tracking-tight">Enhance Image</h2>
+        <p className="text-sm text-[var(--color-text-secondary)] mt-1">
           Select enhancements or create an instant masterpiece.
         </p>
       </div>
@@ -78,16 +78,16 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
       <button
         onClick={() => onEnhance(true)}
         disabled={isProcessing || !hasOriginalImage}
-        className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-violet-600 to-purple-600 border border-violet-400/50 hover:from-violet-500 hover:to-purple-500 disabled:from-slate-700 disabled:to-slate-800 disabled:border-slate-600 disabled:cursor-not-allowed disabled:saturate-50 text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-[1.03] shadow-[0_0_20px_rgba(139,92,246,0.3)] disabled:shadow-none"
+        className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-[var(--color-accent-gradient-from)] to-[var(--color-accent-gradient-to)] border border-[var(--color-accent-primary)]/50 hover:opacity-90 disabled:from-[var(--color-disabled-bg)] disabled:to-gray-200/[var(--color-disabled-bg)] disabled:border-[var(--color-border-secondary)] disabled:text-[var(--color-disabled-fg)] disabled:cursor-not-allowed disabled:saturate-50 text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-[1.03] shadow-[0_0_20px_var(--color-accent-glow)] disabled:shadow-none"
       >
         <SparklesIcon className="w-6 h-6" />
         Instant Masterpiece
       </button>
 
-      <div className="border-t border-slate-800"></div>
+      <div className="border-t border-[var(--color-border-primary)]"></div>
       
       <div>
-        <h3 className="text-lg font-semibold text-slate-100 mb-4">Fine-Tune Controls</h3>
+        <h3 className="text-lg font-semibold text-[var(--color-text-strong)] mb-4">Fine-Tune Controls</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <EnhancementOption 
             icon={<UpscaleIcon className="w-5 h-5"/>}
@@ -116,7 +116,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
         </div>
       </div>
 
-      <div className="border-t border-slate-800"></div>
+      <div className="border-t border-[var(--color-border-primary)]"></div>
 
       <div>
         <EnhancementOption 
@@ -129,12 +129,12 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
         />
       </div>
 
-       <div className="border-t border-slate-800 pt-6 space-y-3">
+       <div className="border-t border-[var(--color-border-primary)] pt-6 space-y-3">
         {hasEnhancedImage && (
             <button
             onClick={onDownload}
             disabled={isProcessing}
-            className="w-full flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 disabled:bg-emerald-800/50 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-xl transition-all duration-200"
+            className="w-full flex items-center justify-center gap-2 bg-[var(--color-success)] hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-xl transition-all duration-200"
             >
             <ArrowDownTrayIcon className="w-5 h-5" />
             Download Result
@@ -144,7 +144,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
              <button
              onClick={onReset}
              disabled={isProcessing}
-             className="w-full flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 disabled:bg-slate-800/50 disabled:cursor-not-allowed text-slate-200 font-semibold py-2 px-4 rounded-xl transition-colors duration-200"
+             className="w-full flex items-center justify-center gap-2 bg-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover)] disabled:opacity-50 disabled:cursor-not-allowed text-[var(--color-text-primary)] font-semibold py-2 px-4 rounded-xl transition-colors duration-200"
            >
              <XCircleIcon className="w-5 h-5" />
              Start Over

@@ -23,22 +23,22 @@ const footerLinks = {
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full bg-slate-950/50 border-t border-slate-800 mt-auto">
+    <footer className="w-full bg-black/10 border-t border-[var(--color-border-primary)] mt-auto">
       <div className="max-w-screen-2xl mx-auto px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="col-span-1 md:col-span-2 lg:col-span-1">
-                 <h2 className="text-base font-bold text-slate-100">
-                    <a href="https://affiliatemarketingforsuccess.com" target="_blank" rel="noopener noreferrer" className="hover:text-violet-400 transition-colors">
+                 <h2 className="text-base font-bold text-[var(--color-text-strong)]">
+                    <a href="https://affiliatemarketingforsuccess.com" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--color-accent-secondary)] transition-colors">
                         AffiliateMarketingForSuccess.com
                     </a>
                 </h2>
-                <p className="text-sm text-slate-400 mt-2">
+                <p className="text-sm text-[var(--color-text-secondary)] mt-2">
                     Your expert guide to mastering affiliate marketing, SEO, and AI-powered content creation for online success.
                 </p>
             </div>
             {Object.entries(footerLinks).map(([category, links]) => (
                 <div key={category}>
-                    <h3 className="text-sm font-semibold tracking-wider text-slate-300 uppercase">{category}</h3>
+                    <h3 className="text-sm font-semibold tracking-wider text-[var(--color-text-primary)] uppercase">{category}</h3>
                     <ul className="mt-4 space-y-3">
                         {links.map(link => (
                             <li key={link.title}>
@@ -46,7 +46,7 @@ export const Footer: React.FC = () => {
                                     href={link.url} 
                                     target="_blank" 
                                     rel="noopener noreferrer" 
-                                    className="text-sm text-slate-400 hover:text-violet-400 transition-colors duration-200"
+                                    className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent-secondary)] transition-colors duration-200"
                                 >
                                     {link.title}
                                 </a>
@@ -56,7 +56,7 @@ export const Footer: React.FC = () => {
                 </div>
             ))}
         </div>
-        <div className="mt-8 border-t border-slate-800 pt-6 text-center text-xs text-slate-500">
+        <div className="mt-8 border-t border-[var(--color-border-primary)] pt-6 text-center text-xs text-slate-500">
             <p>&copy; {new Date().getFullYear()} affiliatemarketingforsuccess.com. All Rights Reserved. This tool is for promotional purposes.</p>
         </div>
       </div>

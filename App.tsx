@@ -48,13 +48,13 @@ function App(): React.ReactNode {
       <Header />
       <main className="flex-grow flex flex-col lg:flex-row p-6 md:p-8 gap-8 animate-fade-in">
         {/* Image viewer is now first for a mobile-first layout */}
-        <div className="flex-grow flex items-center justify-center bg-slate-900/50 rounded-2xl p-2 sm:p-4 min-h-[50vh] lg:min-h-0 relative overflow-hidden border border-slate-800">
+        <div className="flex-grow flex items-center justify-center bg-[var(--color-container-primary)] rounded-2xl p-2 sm:p-4 min-h-[50vh] lg:min-h-0 relative overflow-hidden border border-[var(--color-border-primary)]">
           {isLoading ? (
             <Loader message={loadingMessage} />
           ) : error ? (
-            <div className="text-center text-red-400 p-8 bg-red-900/30 rounded-lg border border-red-700/50">
+            <div className="text-center text-[var(--color-error)] p-8 bg-rose-500/10 rounded-lg border border-rose-500/20">
               <h3 className="text-xl font-bold">An Error Occurred</h3>
-              <p className="mt-2 text-slate-300 max-w-md">{error}</p>
+              <p className="mt-2 text-[var(--color-text-secondary)] max-w-md">{error}</p>
             </div>
           ) : originalImage ? (
             <ImageViewer original={originalImage} enhanced={enhancedImage} />
@@ -64,7 +64,7 @@ function App(): React.ReactNode {
         </div>
 
         {/* Control panel is now second */}
-        <div className="w-full lg:w-[420px] lg:flex-shrink-0 bg-slate-900/60 border border-slate-800 rounded-2xl shadow-2xl p-6 flex flex-col gap-6 h-fit backdrop-blur-2xl">
+        <div className="w-full lg:w-[420px] lg:flex-shrink-0 bg-[var(--color-container-secondary)] border border-[var(--color-border-primary)] rounded-2xl shadow-2xl p-6 flex flex-col gap-6 h-fit backdrop-blur-2xl">
           <ControlPanel
             options={enhancementOptions}
             setOptions={setEnhancementOptions}
