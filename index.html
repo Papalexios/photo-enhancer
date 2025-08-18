@@ -24,10 +24,10 @@
     font-family: 'Inter', sans-serif;
   }
   .bg-premium-gradient {
-    background-color: #02040a;
-    background-image: radial-gradient(at 2% 5%, hsla(220, 80%, 25%, 0.3) 0px, transparent 50%),
-                      radial-gradient(at 95% 90%, hsla(280, 80%, 30%, 0.35) 0px, transparent 50%),
-                      radial-gradient(at 50% 50%, hsla(260, 60%, 15%, 0.2) 0px, transparent 70%);
+    background-color: #020617; /* slate-950 */
+    background-image: radial-gradient(at 2% 5%, hsla(220, 80%, 25%, 0.15) 0px, transparent 50%),
+                      radial-gradient(at 95% 90%, hsla(280, 80%, 30%, 0.15) 0px, transparent 50%),
+                      radial-gradient(at 50% 50%, hsla(260, 60%, 15%, 0.1) 0px, transparent 70%);
   }
   body::before {
     content: '';
@@ -52,7 +52,7 @@
     left: 0;
     width: 200%;
     height: 100%;
-    background: linear-gradient(110deg, transparent 20%, rgba(139, 92, 246, 0.2), transparent 80%);
+    background: linear-gradient(110deg, transparent 20%, rgba(167, 139, 250, 0.2), transparent 80%);
     opacity: 0;
     transform: translateX(-100%);
     transition: opacity 0.5s, transform 0s 0.5s;
@@ -65,7 +65,7 @@
   }
 </style>
 </head>
-  <body class="bg-premium-gradient text-gray-200 font-sans antialiased">
+  <body class="bg-premium-gradient text-slate-200 font-sans antialiased">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

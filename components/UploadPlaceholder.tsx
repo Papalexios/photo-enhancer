@@ -52,15 +52,15 @@ export const UploadPlaceholder: React.FC<UploadPlaceholderProps> = ({ onImageUpl
       onDrop={handleDrop}
       className={`relative w-full max-w-2xl h-full flex flex-col items-center justify-center text-center p-8 rounded-2xl transition-all duration-300 group ${isDragging ? 'scale-105' : 'hover:scale-[1.02]'}`}
     >
-      <div className={`absolute inset-0 border-2 border-dashed rounded-2xl transition-all duration-300 ${isDragging ? 'border-violet-500 bg-violet-500/10' : 'border-white/20 group-hover:border-white/40'}`}></div>
+      <div className={`absolute inset-0 border-2 border-dashed rounded-2xl transition-all duration-300 ${isDragging ? 'border-violet-500 bg-violet-950/30' : 'border-slate-700 group-hover:border-slate-600'}`}></div>
       
       <div className="relative z-10">
-        <PhotoIcon className={`w-24 h-24 text-gray-500 transition-all duration-300 ${isDragging ? 'scale-110 text-violet-400' : 'group-hover:text-gray-400'}`} />
-        <h3 className="mt-4 text-2xl font-bold text-white">Upload Your Photo</h3>
-        <p className="mt-2 text-gray-400">Drag & drop an image here or click the button below.</p>
+        <PhotoIcon className={`w-24 h-24 text-slate-600 transition-all duration-300 ${isDragging ? 'scale-110 text-violet-400' : 'group-hover:text-slate-500'}`} />
+        <h3 className="mt-4 text-2xl font-bold text-slate-100">Upload Your Photo</h3>
+        <p className="mt-2 text-slate-400">Drag & drop an image here or click the button below.</p>
         <button
           onClick={openFileDialog}
-          className="mt-6 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-200 transform hover:scale-105"
+          className="mt-6 bg-gradient-to-r from-violet-600 to-purple-600 border border-violet-500/50 hover:from-violet-500 hover:to-purple-500 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg shadow-purple-600/20"
         >
           Select Image from Device
         </button>

@@ -66,15 +66,14 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({ original, enhanced }) 
                     className="absolute top-0 h-full w-0.5 bg-white/50 backdrop-blur-sm pointer-events-none transition-shadow duration-200 group-hover:shadow-[0_0_15px_2px_rgba(255,255,255,0.7)]"
                     style={{ left: `${sliderPosition}%` }}
                 >
-                    <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white/90 rounded-full h-10 w-10 flex items-center justify-center shadow-2xl ring-4 ring-gray-900/50 backdrop-blur-sm">
-                        <div className="w-1 h-5 bg-gray-700/60 rounded-full"></div>
-                        <div className="w-1 h-5 bg-gray-700/60 rounded-full mx-0.5"></div>
-                        <div className="w-1 h-5 bg-gray-700/60 rounded-full"></div>
+                    <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white/90 rounded-full h-10 w-10 flex items-center justify-center gap-1 shadow-2xl ring-4 ring-slate-900/50 backdrop-blur-sm cursor-ew-resize">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-3 h-3 text-slate-600"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-3 h-3 text-slate-600"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                     </div>
                 </div>
 
-                <div className="absolute bottom-2 left-2 px-2 py-1 text-xs font-bold text-white uppercase bg-black/50 rounded-md pointer-events-none">Before</div>
-                <div className="absolute bottom-2 right-2 px-2 py-1 text-xs font-bold text-white uppercase bg-black/50 rounded-md pointer-events-none" style={{ opacity: sliderPosition > 5 ? 1 : 0}}>After</div>
+                <div className="absolute bottom-2 left-2 px-2 py-1 text-xs font-bold text-white uppercase bg-slate-900/60 backdrop-blur-sm rounded-md pointer-events-none">Before</div>
+                <div className="absolute bottom-2 right-2 px-2 py-1 text-xs font-bold text-white uppercase bg-slate-900/60 backdrop-blur-sm rounded-md pointer-events-none" style={{ opacity: sliderPosition > 5 ? 1 : 0}}>After</div>
             </div>
         </div>
     </div>
