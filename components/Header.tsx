@@ -10,9 +10,22 @@ export const Header: React.FC = () => {
             <div className="w-8 h-8 bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg">
               <SparklesIcon className="w-5 h-5 text-white" />
             </div>
-            <h1 className="text-xl font-bold tracking-tight text-slate-100">
-              Photo AI Enhancer
-            </h1>
+            <div className="flex items-baseline gap-2">
+                <h1 className="text-lg sm:text-xl font-bold tracking-tight text-slate-100">
+                Photo AI Enhancer
+                </h1>
+                <span className="hidden md:inline text-xs text-slate-400">by affiliatemarketingforsuccess.com</span>
+            </div>
+          </div>
+          <div>
+            <a 
+                href="https://affiliatemarketingforsuccess.com/blog/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-slate-300 hover:text-violet-400 transition-colors duration-200"
+            >
+                Read Our Blog
+            </a>
           </div>
         </div>
       </div>

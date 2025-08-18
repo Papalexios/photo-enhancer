@@ -4,6 +4,7 @@ import { ControlPanel } from './components/ControlPanel';
 import { ImageViewer } from './components/ImageViewer';
 import { UploadPlaceholder } from './components/UploadPlaceholder';
 import { Loader } from './components/Loader';
+import { Footer } from './components/Footer';
 import { useImageEnhancer } from './hooks/useImageEnhancer';
 import { EnhancementOptions } from './types';
 
@@ -76,6 +77,7 @@ function App(): React.ReactNode {
           />
         </div>
       </main>
+      <Footer />
     </div>
   );
 }
