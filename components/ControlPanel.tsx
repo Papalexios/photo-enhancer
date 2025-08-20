@@ -7,6 +7,7 @@ import { UpscaleIcon } from './icons/UpscaleIcon';
 import { NoiseReductionIcon } from './icons/NoiseReductionIcon';
 import { FaceDetailIcon } from './icons/FaceDetailIcon';
 import { RestoreIcon } from './icons/RestoreIcon';
+import { ArrowTrendingUpIcon } from './icons/ArrowTrendingUpIcon';
 
 interface EnhancementOptionProps {
   icon: React.ReactNode;
@@ -68,6 +69,27 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
 
   return (
     <div className="flex flex-col space-y-6">
+      <a
+        href="https://viral-post.affiliatemarketingforsuccess.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block p-4 rounded-xl bg-[var(--color-accent-subtle)] border border-transparent hover:border-[var(--color-accent-primary)] transition-all duration-300 transform hover:-translate-y-0.5 group shadow-lg hover:shadow-[0_0_20px_var(--color-accent-glow)] aurora-shimmer"
+      >
+        <div className="flex items-center gap-4">
+          <div className="relative z-10 flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center bg-gradient-to-br from-[var(--color-accent-gradient-from)] to-[var(--color-accent-gradient-to)] text-white shadow-lg">
+            <ArrowTrendingUpIcon className="w-6 h-6" />
+          </div>
+          <div className="relative z-10">
+            <h3 className="font-bold text-[var(--color-text-strong)] group-hover:text-[var(--color-accent-primary)] transition-colors">
+              Dominate Your Niche
+            </h3>
+            <p className="text-sm text-[var(--color-text-secondary)] mt-0.5">
+              – Unlock Your Complete AI-Powered SEO Arsenal
+            </p>
+          </div>
+        </div>
+      </a>
+      
       <div>
         <h2 className="text-xl sm:text-2xl font-bold text-[var(--color-text-strong)] tracking-tight">Enhance Image</h2>
         <p className="text-sm text-[var(--color-text-secondary)] mt-1">
