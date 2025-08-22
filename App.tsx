@@ -27,6 +27,20 @@ function App(): React.ReactNode {
     oldPhotoRestore: false,
   });
 
+  const [isKeyMissing, setIsKeyMissing] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    try {
+      if (!process.env.API_KEY) {
+        console.error("Configuration Error: API_KEY is not defined.");
+        setIsKeyMissing(true);
+      }
+    } catch (e) {
+      console.error("Configuration Error: `process` is not defined. API_KEY cannot be accessed.");
+      setIsKeyMissing(true);
+    }
+  }, []);
+
   const handleEnhancement = (oneTap: boolean) => {
     if (originalImage) {
       enhanceImage(enhancementOptions, oneTap);
@@ -42,6 +56,26 @@ function App(): React.ReactNode {
     link.click();
     document.body.removeChild(link);
   };
+
+  if (isKeyMissing) {
+    return (
+      <div className="min-h-screen flex flex-col bg-premium-gradient">
+        <Header />
+        <main className="flex-grow flex items-center justify-center p-6 md:p-8">
+          <div className="text-center text-[var(--color-error)] p-8 bg-rose-500/10 rounded-lg border border-rose-500/20 max-w-xl">
+            <h3 className="text-2xl font-bold">Configuration Error</h3>
+            <p className="mt-4 text-[var(--color-text-secondary)]">
+              The application cannot connect to the AI service because the API key is missing.
+            </p>
+            <p className="mt-2 text-[var(--color-text-secondary)]">
+              This is a deployment issue. Please ensure the <code className="bg-rose-500/20 px-1 py-0.5 rounded text-sm font-mono">API_KEY</code> environment variable is correctly set in your Cloudflare Pages project settings and that your build process makes it available to the frontend application.
+            </p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-premium-gradient">
