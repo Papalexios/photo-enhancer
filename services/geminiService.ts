@@ -2,11 +2,28 @@
 import { GoogleGenAI, GenerateImagesResponse } from "@google/genai";
 import { EnhancementOptions } from '../types';
 
-if (!process.env.API_KEY) {
-    throw new Error("API_KEY environment variable is not set");
-}
+let aiInstance: GoogleGenAI | null = null;
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+/**
+ * Lazily initializes and returns the GoogleGenAI client instance.
+ * Throws an error if the API key is not configured, which is then caught
+ * by the UI to display a user-friendly message.
+ */
+const getAiClient = (): GoogleGenAI => {
+    if (aiInstance) {
+        return aiInstance;
+    }
+
+    // In a browser environment, `process` might not be defined.
+    // This check prevents a crash and provides a clear error message.
+    if (typeof process === 'undefined' || !process.env || !process.env.API_KEY) {
+        throw new Error("AI API Key is not configured. Please set the API_KEY environment variable in your deployment settings.");
+    }
+    
+    aiInstance = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    return aiInstance;
+};
+
 
 /**
  * Determines the closest supported aspect ratio for the given image dimensions.
@@ -54,6 +71,7 @@ export const createFinalPromptForImagen = async (
   };
   
   try {
+    const ai = getAiClient();
     const response = await ai.models.generateContent({
         model: 'gemini-2.5-flash',
         contents: { parts: [imagePart, textPart] },
@@ -142,6 +160,7 @@ export const generateImageFromPrompt = async (
   const aspectRatio = getBestAspectRatio(dimensions.width, dimensions.height);
 
   try {
+    const ai = getAiClient();
     const response: GenerateImagesResponse = await ai.models.generateImages({
         model: 'imagen-3.0-generate-002',
         prompt: prompt,
