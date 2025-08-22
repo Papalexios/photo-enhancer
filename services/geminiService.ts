@@ -6,22 +6,22 @@ let aiInstance: GoogleGenAI | null = null;
 
 /**
  * Lazily initializes and returns the GoogleGenAI client instance.
- * Throws an error if the API key is not configured, which is then caught
- * by the UI to display a user-friendly message.
+ * It assumes the build environment will replace `process.env.API_KEY`
+ * with the actual key. The SDK will handle errors for missing/invalid keys.
  */
 const getAiClient = (): GoogleGenAI => {
     if (aiInstance) {
         return aiInstance;
     }
-
-    // In a browser environment, `process` might not be defined.
-    // This check prevents a crash and provides a clear error message.
-    if (typeof process === 'undefined' || !process.env || !process.env.API_KEY) {
-        throw new Error("AI API Key is not configured. Please set the API_KEY environment variable in your deployment settings.");
-    }
     
-    aiInstance = new GoogleGenAI({ apiKey: process.env.API_KEY });
-    return aiInstance;
+    try {
+        aiInstance = new GoogleGenAI({ apiKey: process.env.API_KEY });
+        return aiInstance;
+    } catch (e) {
+        console.error("Failed to initialize GoogleGenAI:", e);
+        // Re-throw a user-friendly error if initialization fails.
+        throw new Error("AI API Key is not configured or is invalid. Please ensure the API_KEY is set correctly in your deployment settings.");
+    }
 };
 
 
