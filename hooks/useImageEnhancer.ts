@@ -13,7 +13,7 @@ const loadingMessages = [
   "Almost there, polishing pixels...",
 ];
 
-export const useImageEnhancer = () => {
+export const useImageEnhancer = (apiKey: string | null) => {
   const [originalImage, setOriginalImage] = useState<string | null>(null);
   const [enhancedImage, setEnhancedImage] = useState<string | null>(null);
   const [imageDimensions, setImageDimensions] = useState<{ width: number, height: number } | null>(null);
@@ -64,6 +64,10 @@ export const useImageEnhancer = () => {
       setError('No image or image dimensions available to enhance.');
       return;
     }
+    if (!apiKey) {
+      setError('API Key is missing. Please reset and provide your API key.');
+      return;
+    }
 
     setIsLoading(true);
     setError(null);
@@ -79,10 +83,10 @@ export const useImageEnhancer = () => {
       const imageData = originalImage.split(',')[1];
       
       setLoadingMessage("Crafting enhancement instructions...");
-      const finalPrompt = await createFinalPromptForImagen(imageData, options, oneTap);
+      const finalPrompt = await createFinalPromptForImagen(apiKey, imageData, options, oneTap);
       
       setLoadingMessage("Generating enhanced version...");
-      const newImageBase64 = await generateImageFromPrompt(finalPrompt, imageDimensions);
+      const newImageBase64 = await generateImageFromPrompt(apiKey, finalPrompt, imageDimensions);
       
       setEnhancedImage(`data:image/png;base64,${newImageBase64}`);
 
@@ -111,7 +115,7 @@ export const useImageEnhancer = () => {
       setIsLoading(false);
       setLoadingMessage('');
     }
-  }, [originalImage, imageDimensions]);
+  }, [originalImage, imageDimensions, apiKey]);
   
   const resetImages = useCallback(() => {
     setOriginalImage(null);

@@ -1,36 +1,24 @@
 import { GoogleGenAI, GenerateImagesResponse } from "@google/genai";
 import { EnhancementOptions } from '../types';
 
-// ====================================================================================
-// IMPORTANT: API KEY CONFIGURATION
-// ====================================================================================
-// This logic handles two scenarios:
-// 1. PREVIEW/LOCAL ENVIRONMENT: It uses `process.env.API_KEY` if available,
-//    allowing the app to work seamlessly in previews that inject this variable.
-// 2. PRODUCTION DEPLOYMENT (Build-less): If `process.env.API_KEY` is not found,
-//    it falls back to the placeholder. For your live site to work, you MUST
-//    replace "YOUR_API_KEY_HERE" with your actual Google Gemini API key.
-// ====================================================================================
-export const API_KEY = process.env.API_KEY || "AIzaSyB3XWY-PUp2crpLOk50rd6semHZO7mLNG4";
-
-
 let aiInstance: GoogleGenAI | null = null;
+let currentApiKey: string | null = null;
 
 /**
- * Initializes and returns the GoogleGenAI client instance.
- * Throws an error if the API key has not been set in the constant above.
+ * Manages the GoogleGenAI client instance.
+ * It creates a new instance only when the API key changes.
  */
-const getAiClient = (): GoogleGenAI => {
-    if (API_KEY === "YOUR_API_KEY_HERE" || !API_KEY) {
-        // This error will be caught by the useImageEnhancer hook and displayed in the UI.
-        throw new Error("API Key is not configured. Please edit services/geminiService.ts and add your key.");
-    }
-
-    if (aiInstance) {
+const getAiClient = (apiKey: string): GoogleGenAI => {
+    if (apiKey === currentApiKey && aiInstance) {
         return aiInstance;
     }
     
-    aiInstance = new GoogleGenAI({ apiKey: API_KEY });
+    if (!apiKey) {
+        throw new Error("API Key is not provided.");
+    }
+    
+    aiInstance = new GoogleGenAI({ apiKey });
+    currentApiKey = apiKey;
     return aiInstance;
 };
 
@@ -65,6 +53,7 @@ const getBestAspectRatio = (width: number, height: number): "1:1" | "3:4" | "4:3
  * Step 1: Use Gemini Flash to analyze the source image and generate a clean, literal description.
  */
 export const createFinalPromptForImagen = async (
+  apiKey: string,
   base64Image: string,
   options: EnhancementOptions,
   oneTap: boolean
@@ -81,7 +70,7 @@ export const createFinalPromptForImagen = async (
   };
   
   try {
-    const ai = getAiClient();
+    const ai = getAiClient(apiKey);
     const response = await ai.models.generateContent({
         model: 'gemini-2.5-flash',
         contents: { parts: [imagePart, textPart] },
@@ -164,13 +153,14 @@ export const createFinalPromptForImagen = async (
  * Step 2: Use Imagen to generate a new, high-quality image based on the master prompt.
  */
 export const generateImageFromPrompt = async (
+  apiKey: string,
   prompt: string,
   dimensions: { width: number, height: number }
 ): Promise<string> => {
   const aspectRatio = getBestAspectRatio(dimensions.width, dimensions.height);
 
   try {
-    const ai = getAiClient();
+    const ai = getAiClient(apiKey);
     const response: GenerateImagesResponse = await ai.models.generateImages({
         model: 'imagen-3.0-generate-002',
         prompt: prompt,
