@@ -1,25 +1,36 @@
-
-
 import { GoogleGenAI, GenerateImagesResponse } from "@google/genai";
 import { EnhancementOptions } from '../types';
+
+// ====================================================================================
+// IMPORTANT: API KEY CONFIGURATION
+// ====================================================================================
+// This logic handles two scenarios:
+// 1. PREVIEW/LOCAL ENVIRONMENT: It uses `process.env.API_KEY` if available,
+//    allowing the app to work seamlessly in previews that inject this variable.
+// 2. PRODUCTION DEPLOYMENT (Build-less): If `process.env.API_KEY` is not found,
+//    it falls back to the placeholder. For your live site to work, you MUST
+//    replace "YOUR_API_KEY_HERE" with your actual Google Gemini API key.
+// ====================================================================================
+export const API_KEY = process.env.API_KEY || "AIzaSyBpz1lgLXci5YlITA8TKTt3L8AsDb_i-Xw";
+
 
 let aiInstance: GoogleGenAI | null = null;
 
 /**
- * Lazily initializes and returns the GoogleGenAI client instance.
- * It assumes the build environment will replace `process.env.API_KEY`
- * with the actual key. The SDK will handle errors for missing/invalid keys.
+ * Initializes and returns the GoogleGenAI client instance.
+ * Throws an error if the API key has not been set in the constant above.
  */
 const getAiClient = (): GoogleGenAI => {
+    if (API_KEY === "YOUR_API_KEY_HERE" || !API_KEY) {
+        // This error will be caught by the useImageEnhancer hook and displayed in the UI.
+        throw new Error("API Key is not configured. Please edit services/geminiService.ts and add your key.");
+    }
+
     if (aiInstance) {
         return aiInstance;
     }
     
-    // This now trusts that the build environment provides `process.env.API_KEY`.
-    // Any errors during initialization (e.g., missing key, invalid key, or
-    // `process` not being defined) will bubble up and provide a more
-    // specific error message in the UI, which helps in debugging deployment issues.
-    aiInstance = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    aiInstance = new GoogleGenAI({ apiKey: API_KEY });
     return aiInstance;
 };
 

@@ -7,6 +7,7 @@ import { Loader } from './components/Loader';
 import { Footer } from './components/Footer';
 import { useImageEnhancer } from './hooks/useImageEnhancer';
 import { EnhancementOptions } from './types';
+import { API_KEY } from './services/geminiService';
 
 function App(): React.ReactNode {
   const {
@@ -27,19 +28,7 @@ function App(): React.ReactNode {
     oldPhotoRestore: false,
   });
 
-  const [isKeyMissing, setIsKeyMissing] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    try {
-      if (!process.env.API_KEY) {
-        console.error("Configuration Error: API_KEY is not defined.");
-        setIsKeyMissing(true);
-      }
-    } catch (e) {
-      console.error("Configuration Error: `process` is not defined. API_KEY cannot be accessed.");
-      setIsKeyMissing(true);
-    }
-  }, []);
+  const isKeyMissing = API_KEY === "YOUR_API_KEY_HERE";
 
   const handleEnhancement = (oneTap: boolean) => {
     if (originalImage) {
@@ -63,12 +52,12 @@ function App(): React.ReactNode {
         <Header />
         <main className="flex-grow flex items-center justify-center p-6 md:p-8">
           <div className="text-center text-[var(--color-error)] p-8 bg-rose-500/10 rounded-lg border border-rose-500/20 max-w-xl">
-            <h3 className="text-2xl font-bold">Configuration Error</h3>
+            <h3 className="text-2xl font-bold">Action Required: Add API Key</h3>
             <p className="mt-4 text-[var(--color-text-secondary)]">
-              The application cannot connect to the AI service because the API key is missing.
+              The application needs a Google Gemini API key to function.
             </p>
             <p className="mt-2 text-[var(--color-text-secondary)]">
-              This is a deployment issue. Please ensure the <code className="bg-rose-500/20 px-1 py-0.5 rounded text-sm font-mono">API_KEY</code> environment variable is correctly set in your Cloudflare Pages project settings and that your build process makes it available to the frontend application.
+              Please open the file <code className="bg-rose-500/20 px-1 py-0.5 rounded text-sm font-mono">services/geminiService.ts</code> in your editor, find the <code className="bg-rose-500/20 px-1 py-0.5 rounded text-sm font-mono">API_KEY</code> constant, and replace the placeholder string with your actual key.
             </p>
           </div>
         </main>
