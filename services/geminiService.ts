@@ -1,4 +1,5 @@
 
+
 import { GoogleGenAI, GenerateImagesResponse } from "@google/genai";
 import { EnhancementOptions } from '../types';
 
@@ -14,14 +15,12 @@ const getAiClient = (): GoogleGenAI => {
         return aiInstance;
     }
     
-    try {
-        aiInstance = new GoogleGenAI({ apiKey: process.env.API_KEY });
-        return aiInstance;
-    } catch (e) {
-        console.error("Failed to initialize GoogleGenAI:", e);
-        // Re-throw a user-friendly error if initialization fails.
-        throw new Error("AI API Key is not configured or is invalid. Please ensure the API_KEY is set correctly in your deployment settings.");
-    }
+    // This now trusts that the build environment provides `process.env.API_KEY`.
+    // Any errors during initialization (e.g., missing key, invalid key, or
+    // `process` not being defined) will bubble up and provide a more
+    // specific error message in the UI, which helps in debugging deployment issues.
+    aiInstance = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    return aiInstance;
 };
 
 
