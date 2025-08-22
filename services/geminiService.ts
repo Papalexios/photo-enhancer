@@ -11,7 +11,7 @@ import { EnhancementOptions } from '../types';
 //    it falls back to the placeholder. For your live site to work, you MUST
 //    replace "YOUR_API_KEY_HERE" with your actual Google Gemini API key.
 // ====================================================================================
-export const API_KEY = process.env.API_KEY || "AIzaSyBpz1lgLXci5YlITA8TKTt3L8AsDb_i-Xw";
+export const API_KEY = process.env.API_KEY || "AIzaSyB3XWY-PUp2crpLOk50rd6semHZO7mLNG4";
 
 
 let aiInstance: GoogleGenAI | null = null;

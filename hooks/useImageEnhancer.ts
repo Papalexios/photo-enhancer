@@ -88,8 +88,24 @@ export const useImageEnhancer = () => {
 
     } catch (err) {
       console.error(err);
-      const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred during enhancement.';
-      setError(`Failed to enhance image. ${errorMessage}`);
+      let friendlyErrorMessage = 'An unknown error occurred during enhancement.';
+
+      if (err instanceof Error) {
+        // Attempt to parse the error message as JSON, which the API sometimes returns
+        try {
+          const errorJson = JSON.parse(err.message);
+          if (errorJson?.error?.message) {
+            friendlyErrorMessage = `API Error: ${errorJson.error.message}`;
+          } else {
+            friendlyErrorMessage = err.message;
+          }
+        } catch (parseError) {
+          // If parsing fails, it's just a regular string message
+          friendlyErrorMessage = err.message;
+        }
+      }
+      
+      setError(`Failed to enhance image. ${friendlyErrorMessage}`);
     } finally {
       clearInterval(messageInterval);
       setIsLoading(false);
